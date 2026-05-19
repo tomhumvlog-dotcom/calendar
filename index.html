@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StudyTracker - Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#001f26",
+                        "outline": "#777587",
+                        "on-background": "#151c27",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-surface-variant": "#464555",
+                        "secondary": "#006c49",
+                        "surface-container-high": "#e2e8f8",
+                        "outline-variant": "#c7c4d8",
+                        "surface-variant": "#dce2f3",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#002113",
+                        "surface-container-highest": "#dce2f3",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#4d44e3",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d3daea",
+                        "secondary-container": "#6cf8bb",
+                        "inverse-surface": "#2a313d",
+                        "on-tertiary-container": "#93e8ff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "primary": "#3525cd",
+                        "tertiary-container": "#006a7c",
+                        "on-secondary-container": "#00714d",
+                        "surface-container-low": "#f0f3ff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "secondary-fixed": "#6ffbbe",
+                        "primary-container": "#4f46e5",
+                        "tertiary": "#00505f",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface": "#f9f9ff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#151c27",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-primary-container": "#dad7ff",
+                        "tertiary-fixed": "#acedff",
+                        "background": "#f9f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "1.5rem",
+                        "margin": "2rem",
+                        "lg": "2rem",
+                        "gutter": "1.5rem",
+                        "max-width": "1280px",
+                        "unit": "4px",
+                        "xl": "3rem",
+                        "xs": "0.5rem",
+                        "sm": "1rem"
+                    },
+                    "fontFamily": {
+                        "h2": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "h1": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Scrollbar for side panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #dce2f3; /* surface-variant */
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-lg gap-md fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm dark:shadow-none z-40">
+<div class="px-md mb-md">
+<h1 class="font-h2 text-h2 font-bold text-primary dark:text-primary-fixed">StudyTracker</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Deep Work Mode</p>
+</div>
+<div class="flex-1 flex flex-col gap-unit px-sm">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-md py-xs hover:text-primary hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-md py-xs hover:text-primary hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">checklist</span>
+<span class="font-body-md text-body-md font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-md py-xs hover:text-primary hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">timer</span>
+<span class="font-body-md text-body-md font-medium">Time Tracker</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-md py-xs hover:text-primary hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">target</span>
+<span class="font-body-md text-body-md font-medium">Goals</span>
+</a>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-on-primary-fixed rounded-lg px-md py-xs translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined fill">calendar_today</span>
+<span class="font-body-md text-body-md font-medium">Calendar</span>
+</a>
+</div>
+<div class="mt-auto px-md">
+<button class="w-full bg-primary text-on-primary font-body-md text-body-md font-medium py-xs px-sm rounded-lg hover:bg-primary-container transition-colors shadow-sm active:shadow-none active:translate-y-px">
+                Start Focus Session
+            </button>
+</div>
+<div class="px-sm mt-sm">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-md py-xs hover:text-primary hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 min-h-screen">
+<!-- TopAppBar (Mobile Top, Desktop Header) -->
+<header class="flex justify-between items-center px-lg py-sm w-full sticky top-0 z-30 max-w-max-width mx-auto bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline md:border-none md:bg-transparent">
+<div class="flex items-center gap-sm">
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface-variant p-2 -ml-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-h1 text-h1 font-bold text-on-surface tracking-tight md:hidden">Calendar</h2>
+</div>
+<!-- Desktop Context Actions -->
+<div class="hidden md:flex items-center gap-sm">
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded-full p-1 shadow-sm">
+<button class="px-md py-1 rounded-full font-label-md text-label-md font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Day</button>
+<button class="px-md py-1 rounded-full font-label-md text-label-md font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Week</button>
+<button class="px-md py-1 rounded-full font-label-md text-label-md font-semibold bg-primary-container text-on-primary-container shadow-sm">Month</button>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-container dark:hover:bg-inverse-surface p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container dark:hover:bg-inverse-surface p-2 rounded-full transition-colors duration-200 hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<img alt="User profile avatar" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A close-up portrait of a young professional male avatar used for a profile picture. The lighting is soft and neutral, fitting a clean, modern UI aesthetic. The background is subtle, keeping focus on the subject." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVP5QPozRgTtD7AZLcWuzr3oJWs4vOoYPLMvwmZ0yXUqxQ6AO4GXOL4J3stT4r3TW3HHhbP4Jl0uU4SRmFr2rT2QYXePe89XA4VlBtZIKvnQ4BlrRriroa6CEbANjfKmCb8vSoClpM8W4QyanmHITBCAmwLBbl6zNIldGhD9g9JtTQ2q931HSS8c_wddEFnmzesw741a7a8yJFfvwRFj2JDN10rtNAckqpGYtwPXySQGs07D7_R-3_HK8wEgmF_VmJtQ_iRqpgxw"/>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Calendar Canvas -->
+<div class="flex-1 flex flex-col p-md lg:p-lg overflow-y-auto custom-scrollbar">
+<!-- Desktop Header (Title & Controls) -->
+<div class="hidden md:flex justify-between items-end mb-lg">
+<div>
+<h1 class="font-display text-display text-on-surface">October 2023</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Midterm preparation weeks.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 border border-outline-variant rounded-full text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="font-body-sm text-body-sm font-medium px-md py-2 border border-outline-variant rounded-full text-on-surface hover:bg-surface-container transition-colors">
+                            Today
+                        </button>
+<button class="p-2 border border-outline-variant rounded-full text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Mobile Controls -->
+<div class="md:hidden flex justify-between items-center mb-md">
+<h2 class="font-h2 text-h2 text-on-surface">Oct 2023</h2>
+<div class="flex items-center gap-2">
+<button class="p-1 border border-outline-variant rounded-full text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 border border-outline-variant rounded-full text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<!-- Calendar Grid Container -->
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Days of Week Header -->
+<div class="grid grid-cols-7 border-b border-outline-variant bg-surface-bright">
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sun</div>
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Mon</div>
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tue</div>
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Wed</div>
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Thu</div>
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Fri</div>
+<div class="py-sm text-center font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sat</div>
+</div>
+
+
+<!-- Calendar Grid -->
+
+
+<div id="calendar-grid" class="flex-1 grid grid-cols-7 grid-rows-5 bg-outline-variant gap-px">
+<!-- Row 1 -->
+<div class="bg-surface-bright p-2 min-h-[100px] flex flex-col opacity-50"><span class="font-body-sm text-body-sm text-on-surface-variant ml-1">24</span></div>
+<div class="bg-surface-bright p-2 min-h-[100px] flex flex-col opacity-50"><span class="font-body-sm text-body-sm text-on-surface-variant ml-1">25</span></div>
+<div class="bg-surface-bright p-2 min-h-[100px] flex flex-col opacity-50"><span class="font-body-sm text-body-sm text-on-surface-variant ml-1">26</span></div>
+<div class="bg-surface-bright p-2 min-h-[100px] flex flex-col opacity-50"><span class="font-body-sm text-body-sm text-on-surface-variant ml-1">27</span></div>
+<div class="bg-surface-bright p-2 min-h-[100px] flex flex-col opacity-50"><span class="font-body-sm text-body-sm text-on-surface-variant ml-1">28</span></div>
+<div class="bg-surface-bright p-2 min-h-[100px] flex flex-col opacity-50"><span class="font-body-sm text-body-sm text-on-surface-variant ml-1">29</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1">30</span></div>
+<!-- Row 2 -->
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">1</span>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">2</span>
+<div class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">CS301 Reading</div>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">3</span>
+<div class="bg-error-container text-on-error-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">Math Quiz</div>
+<div class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate border border-outline-variant">Study Group</div>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">4</span>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">5</span>
+<div class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">Draft Essay</div>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">6</span>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">7</span>
+</div>
+<!-- Row 3 -->
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">8</span>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer relative bg-surface-container">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">9</span>
+<!-- Active Selection Ring -->
+<div class="absolute inset-0 border-2 border-primary rounded z-10 pointer-events-none"></div>
+<div class="bg-error-container text-on-error-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">History Midterm</div>
+<div class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">Review Notes</div>
+<div class="bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">Lab Report Due</div>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">10</span>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-primary font-medium ml-1 mb-1 bg-primary w-6 h-6 flex items-center justify-center rounded-full">11</span>
+<div class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate shadow-sm">Project Pitch</div>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">12</span>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">13</span>
+<div class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-1.5 py-0.5 rounded mb-1 truncate border border-outline-variant">Rest Day</div>
+</div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">14</span>
+</div>
+<!-- Row 4 -->
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">15</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">16</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">17</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">18</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">19</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">20</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">21</span></div>
+<!-- Row 5 -->
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">22</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">23</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">24</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">25</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">26</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">27</span></div>
+<div class="bg-surface-container-lowest p-2 min-h-[100px] flex flex-col hover:bg-surface-container-low transition-colors cursor-pointer"><span class="font-body-sm text-body-sm text-on-surface font-medium ml-1 mb-1">28</span></div>
+</div>
+</div>
+</div>
+
+
+<!-- CONTEXTUAL Side Panel (Task List for Selected Day) -->
+<aside class="hidden xl:flex flex-col w-80 border-l border-outline-variant bg-surface-container-lowest overflow-y-auto custom-scrollbar">
+<div class="p-lg border-b border-outline-variant sticky top-0 bg-surface-container-lowest z-10">
+<h3 id="side-panel-date" class="font-h3 text-h3 text-on-surface">Monday, Oct 9</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">3 items scheduled</p>
+<button id="btn-new-task" class="mt-md w-full flex items-center justify-center gap-2 bg-surface-bright border border-outline-variant text-primary font-label-md text-label-md font-semibold py-2 px-4 rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        New Task
+                    </button>
+</div>
+<div id="side-panel-tasks" class="p-md flex flex-col gap-sm">
+<!-- Task Item 1 (High Priority) -->
+<div class="bg-surface-bright border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-0.5 rounded-full">High Priority</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 10:00 AM
+                            </span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface pl-2 mb-1">History Midterm</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-2 line-clamp-2">Chapters 4-8. Focus on the industrial revolution impacts.</p>
+<div class="mt-3 pl-2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</div>
+<!-- Task Item 2 (Medium Priority) -->
+<div class="bg-surface-bright border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full">Medium</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 2:00 PM
+                            </span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface pl-2 mb-1">Review Notes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-2 line-clamp-2">Consolidate lecture notes for upcoming CS seminar.</p>
+</div>
+<!-- Task Item 3 (Low Priority/Task) -->
+<div class="bg-surface-bright border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<span class="bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full">Assignment</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 11:59 PM
+                            </span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface pl-2 mb-1">Lab Report Due</h4>
+<div class="pl-2 mt-2">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-full bg-surface-variant rounded-full h-1.5">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 80%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">80%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden in this mockup, structure provided)
+                <div class="flex-1 flex flex-col items-center justify-center p-lg text-center opacity-0 hidden">
+                    <span class="material-symbols-outlined text-display text-outline-variant mb-sm">event_available</span>
+                    <p class="font-body-md text-body-md text-on-surface-variant">No tasks scheduled for this day.</p>
+                </div>
+                -->
+</aside>
+</div>
+</main>
+
+<!-- add task modal at the right -->
+
+<div id="task-modal" class="fixed inset-0 bg-on-background/50 hidden z-50 flex items-center justify-center backdrop-blur-sm transition-opacity">
+    <div class="bg-surface-container-lowest rounded-xl p-lg w-full max-w-md shadow-lg border border-outline-variant">
+        <h2 class="font-h2 text-h2 text-on-surface mb-md">Create New Task</h2>
+        
+        <div class="flex flex-col gap-sm mb-md">
+            <input type="text" id="task-title" placeholder="Task Name (e.g. Read Chapter 4)" class="w-full p-2 border border-outline-variant rounded-lg bg-surface focus:outline-none focus:border-primary">
+            
+            <div class="flex gap-sm">
+                <input type="time" id="task-time" class="w-1/2 p-2 border border-outline-variant rounded-lg bg-surface focus:outline-none focus:border-primary">
+                <select id="task-priority" class="w-1/2 p-2 border border-outline-variant rounded-lg bg-surface focus:outline-none focus:border-primary">
+                    <option value="high">High Priority</option>
+                    <option value="medium">Medium</option>
+                    <option value="assignment">Assignment</option>
+                </select>
+            </div>
+            
+            <textarea id="task-desc" placeholder="Description (optional)" class="w-full p-2 border border-outline-variant rounded-lg bg-surface focus:outline-none focus:border-primary resize-none h-20"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-sm">
+            <button id="btn-cancel-task" class="px-md py-2 text-on-surface-variant hover:bg-surface-container rounded-lg font-medium transition-colors">Cancel</button>
+            <button id="btn-save-task" class="px-md py-2 bg-primary text-on-primary rounded-lg font-medium hover:opacity-90 transition-opacity">Save Task</button>
+        </div>
+    </div>
+</div>
+
+<script src = "calendar.js"></script>
+
+</body></html>
